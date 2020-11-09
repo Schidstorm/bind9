@@ -48,7 +48,10 @@ jobs:
         uses: appleboy/ssh-action@v0.0.9
         with:
           script: | 
-            docker stack deploy --compose-file /etc/docker-compose/${{ steps.split.outputs._1 }}/docker-compose.yml ${{ steps.split.outputs._1 }}
+            docker stack deploy --compose-file /etc/docker-compose/${{ steps.split.outputs._1 }}/docker-compose.yml ${{ steps.split.outputs._1 }} |
+            echo waiting a bit for service to be up.. |
+            sleep 10 |
+            docker stack ps --no-trunc ${{ steps.split.outputs._1 }} --format '{{.Name}}.{{.ID}}' | xargs -L 1 docker network connect vpn || true
           host: schidlow.ski
           port: 1022
           username: deploy

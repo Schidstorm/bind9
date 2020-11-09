@@ -15,12 +15,3 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
-    networks:
-      - default
-      - vpn
-
-networks:
-  default:
-  vpn:
-    external: true
