@@ -1,0 +1,24 @@
+version: "3.5"
+
+services:
+  bind9:
+    image: resystit/bind9:latest
+    hostname: bind9
+    ports:
+      - '53:53/udp'
+      - '53:53'
+    volumes:
+      - ./configfiles/named.conf:/etc/bind/named.conf
+      - ./configfiles/master:/etc/bind/master
+
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+
+    networks:
+      - vpn
+
+networks:
+  vpn:
+    external: true
