@@ -10,11 +10,7 @@ services:
     volumes:
       - ./configfiles/named.conf:/etc/bind/named.conf
       - ./configfiles/master:/etc/bind/master
-
     restart: unless-stopped
-    deploy:
-      mode: replicated
-      replicas: 1
 
     networks:
       - vpn
