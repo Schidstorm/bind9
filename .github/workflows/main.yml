@@ -48,7 +48,7 @@ jobs:
         uses: appleboy/ssh-action@v0.0.9
         with:
           script: | 
-            docker-compose -f /etc/docker-compose/${{ steps.split.outputs._1 }}/docker-compose.yml up -d
+            docker-compose -f /etc/docker-compose/${{ steps.split.outputs._1 }}/docker-compose.yml up -d --force-recreate
           host: schidlow.ski
           port: 1022
           username: deploy
